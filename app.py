@@ -1,6 +1,9 @@
 import streamlit as st
 import numpy as np
 from scipy.stats import norm
+import matplotlib.pyplot as plt
+import numpy as np
+import streamlit as st
 
 # Black-Scholes pricing function
 def black_scholes_price(S, K, T, r, sigma, option_type='call'):
@@ -42,6 +45,37 @@ def black_scholes_greeks(S, K, T, r, sigma, option_type='call'):
         'Vega': vega,
         'Rho': rho
     }
+
+
+# Pricing function
+from scipy.stats import norm
+
+def black_scholes(S, K, T, r, sigma, option_type='call'):
+    d1 = (np.log(S / K) + (r + 0.5 * sigma**2) * T) / (sigma * np.sqrt(T))
+    d2 = d1 - sigma * np.sqrt(T)
+
+    if option_type == 'call':
+        price = S * norm.cdf(d1) - K * np.exp(-r * T) * norm.cdf(d2)
+    else:
+        price = K * np.exp(-r * T) * norm.cdf(-d2) - S * norm.cdf(-d1)
+
+    return price
+
+# Add header
+st.subheader("📊 Option Price vs Strike Price")
+
+# Set up ranges for plot
+K_values = np.linspace(0.5 * strike_price, 1.5 * strike_price, 100)
+prices = [black_scholes(spot_price, K, time_to_maturity, risk_free_rate, volatility, option_type) for K in K_values]
+
+# Plot
+fig, ax = plt.subplots()
+ax.plot(K_values, prices, label=f'{option_type.capitalize()} Price')
+ax.set_xlabel("Strike Price")
+ax.set_ylabel("Option Price")
+ax.set_title("Black-Scholes Option Price vs. Strike Price")
+ax.legend()
+st.pyplot(fig)
 
 # Streamlit UI
 st.title("Black-Scholes Option Pricing Calculator")
