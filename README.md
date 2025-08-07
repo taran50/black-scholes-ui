@@ -3,10 +3,10 @@
 This is a deployed web app that uses the Black-Scholes model to calculate European call and put option prices, along with the Greeks (Delta, Gamma, Theta, Vega, Rho).
 
 ## Features
-- 🧮 Input Spot Price, Strike Price, Interest Rate, Volatility, Time to Maturity
-- 📈 Calculates Option Prices (Call & Put)
-- 🧠 Calculates Greeks (Delta, Gamma, Theta, Vega, Rho)
-- 🌐 Deployed using Streamlit Cloud
+- Input Spot Price, Strike Price, Interest Rate, Volatility, Time to Maturity
+- Calculates Option Prices (Call & Put)
+- Calculates Greeks (Delta, Gamma, Theta, Vega, Rho)
+- Deployed using Streamlit Cloud
 
 ## Technologies Used
 - Python
