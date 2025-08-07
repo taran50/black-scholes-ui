@@ -16,7 +16,7 @@ This is a deployed web app that uses the Black-Scholes model to calculate Europe
 - Streamlit Cloud (Deployment)
 
 ## Live App
-[Click here to view the live app]([https://your-app-name.streamlit.app](https://black-scholes-ui-q894ymwpsimvvoyhzewl3l.streamlit.app))
+[Click here to view the live app]([https://your-app-name.streamlit.app](https://black-scholes-ui-q894ymwpsimvvoyhzewl3l.streamlit.app])
 
 ## How to Run Locally
 1. Clone this repo
