@@ -3,4 +3,6 @@ numpy
 scipy
 matplotlib
 plotly
+yfinance
+pandas
 
