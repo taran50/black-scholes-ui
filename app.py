@@ -1,9 +1,10 @@
 import streamlit as st
 import numpy as np
-from scipy.stats import norm
+import pandas as pd
 import matplotlib.pyplot as plt
-import numpy as np
-import streamlit as st
+import yfinance as yf
+from scipy.stats import norm
+
 
 # Black-Scholes pricing function
 def black_scholes_price(S, K, T, r, sigma, option_type='call'):
@@ -63,18 +64,24 @@ def black_scholes(S, K, T, r, sigma, option_type='call'):
 
 
 
-S = st.number_input("Spot Price (S)", value=100.0)
-K = st.number_input("Strike Price (K)", value=100.0)
-T = st.number_input("Time to Maturity (T in years)", value=1.0)
-r = st.number_input("Risk-Free Rate (r)", value=0.05)
-sigma = st.number_input("Volatility (σ)", value=0.2)
-option_type = st.selectbox("Option Type", ['call', 'put'])
+tab1, tab2 = st.tabs(["Option Calculator", "Backtest Strategy"])
 
-if st.button("Calculate"):
-    price = black_scholes_price(S, K, T, r, sigma, option_type)
-    greeks = black_scholes_greeks(S, K, T, r, sigma, option_type)
+# === TAB 1: Option Calculator ===
+with tab1:
+    st.header("Black-Scholes Option Pricing Calculator")
 
-    st.subheader(f"Option Price: ${price:.2f}")
-    st.subheader("Greeks:")
-    for greek, value in greeks.items():
-        st.write(f"{greek}: {value:.4f}")
+    S = st.number_input("Spot Price (S)", value=100.0)
+    K = st.number_input("Strike Price (K)", value=100.0)
+    T = st.number_input("Time to Maturity (T in years)", value=1.0)
+    r = st.number_input("Risk-Free Rate (r)", value=0.05)
+    sigma = st.number_input("Volatility (σ)", value=0.2)
+    option_type = st.selectbox("Option Type", ['call', 'put'])
+
+    if st.button("Calculate"):
+        price = black_scholes_price(S, K, T, r, sigma, option_type)
+        greeks = black_scholes_greeks(S, K, T, r, sigma, option_type)
+
+        st.subheader(f"Option Price: ${price:.2f}")
+        st.subheader("Greeks:")
+        for greek, value in greeks.items():
+            st.write(f"{greek}: {value:.4f}")
